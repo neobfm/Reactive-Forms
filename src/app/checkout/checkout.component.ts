@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -10,10 +10,18 @@ export class CheckoutComponent implements OnInit {
 
   checkoutform: FormGroup;
   constructor(private formBuilder: FormBuilder) {
+    /*
     this.checkoutform = formBuilder.group({
       emailAddr: new FormControl(),
       quantity: new FormControl(),
       terms: new FormControl()
+    });
+      */
+
+    this.checkoutform = formBuilder.group({
+      email: [ '', Validators.required, Validators.email],
+      quantity: [ '', Validators.required],
+      terms: [ '', Validators.requiredTrue],
     });
 
   }
