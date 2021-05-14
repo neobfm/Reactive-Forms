@@ -113,5 +113,6 @@ export class CheckoutComponent implements OnInit {
   // Removing a row from the form
   removeItem(itemId){
    this.items.removeAt(itemId);
+   console.log('removed rows');
   }
 }
