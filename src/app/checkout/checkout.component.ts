@@ -26,11 +26,25 @@ export class CheckoutComponent implements OnInit {
       email: [ '', Validators.required],
       quantity: [ '', Validators.required],
       terms: [ '', Validators.requiredTrue],
+      // using Form Array
+      items : this.formBuilder.array([
+        this.formBuilder.group({
+        itemId: ['1'],
+        itemName: ['2'],
+        itemDesc: ['3'],
+        itemDone: ['', Validators.requiredTrue]
+      })
+      ])
     });
 
   }
 
   ngOnInit(): void {
+
+    console.log(this.checkoutform.get('items').value.length);
+    console.log(this.checkoutform.get('items').value);
+    const itemVal = this.checkoutform.get('items').value;
+    console.log(itemVal[0].itemDesc);
 
     // track a single field only
     this.checkoutform.get('email').valueChanges.subscribe(data => {
@@ -42,6 +56,14 @@ export class CheckoutComponent implements OnInit {
       console.log(data);
     });
 
+    // Status change of a form for a single field
+    this.checkoutform.get('email').statusChanges.subscribe(data => {
+       console.log(data);
+     });
+       // status change for the entire form
+    this.checkoutform.statusChanges.subscribe(Formstate => {
+      console.log(Formstate);
+    });
     /*
     this.checkoutform.setValue({
       email: 'test@test.com', // setting values for single fields of the form for all fields
@@ -63,7 +85,34 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkoutform.value.quantity);
     console.log(this.checkoutform.value.terms);
   }
+  // tslint:disable-next-line: typedef
   resetForm(){
     this.checkoutform.reset();
+  }
+
+  // tslint:disable-next-line: typedef
+  get items(){
+    return this.checkoutform.get('items') as FormArray;
+  }
+
+  // adding a new row on a dynamical form
+  // tslint:disable-next-line: typedef
+  addNewItem(){
+    const itemLength = this.items.length;
+    const newItem = this.formBuilder.group({
+      // set the new item to be blank
+      itemId: [itemLength + 1],
+      itemName: [''],
+      itemDesc: [''],
+      itemDone: ['', Validators.requiredTrue]
+    });
+
+    this.items.push(newItem);
+  }
+
+  // Removing a row from the form
+  removeItem(itemId){
+   this.items.removeAt(itemId);
+   console.log('removed rows');
   }
 }
