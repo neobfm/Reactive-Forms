@@ -5,16 +5,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ObservableComponent } from './observables/observable.component';
+import { ContactsComponent } from './contacts/contacts/contacts.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ObservableComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
