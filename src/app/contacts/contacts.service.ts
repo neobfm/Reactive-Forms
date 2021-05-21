@@ -36,7 +36,16 @@ return this.httpClient.get('http://localhost:3000/contacts');
      return this.httpClient.put(endpointURL, updatedBody);
     }
     deleteContacts(contactId){
-      const endpointURL = 'http://localhost:3000/contacts/' + contactId;
+      const endpointURL = 'http://localhost:3000/contacts/?' + contactId;
       return this.httpClient.delete(endpointURL);
+    }
+
+    getContactById(){
+      const httParams = new HttpParams({
+           fromObject:{
+             query: 'mark'
+           }
+      });
+      return  this.httpClient.get('http://localhost:3000/contacts', { params: httParams});
     }
 }

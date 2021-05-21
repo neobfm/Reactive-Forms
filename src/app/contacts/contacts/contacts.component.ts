@@ -49,4 +49,9 @@ export class ContactsComponent implements OnInit {
         this.msgTrue = true;
       });
   }
+  getContact(){
+    this.contactService.getContactById().subscribe(data => {
+      console.log(data);
+    });
+  }
 }
