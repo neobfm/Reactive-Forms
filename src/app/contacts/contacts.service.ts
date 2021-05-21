@@ -10,7 +10,10 @@ export class ContactsService {
 
 // tslint:disable-next-line: typedef
     getContacts(){
-    return this.httpClient.get('http://localhost:3000/contacts');
+const httpHeaders = new HttpHeaders();
+httpHeaders.append('content-type', 'application/json');
+
+return this.httpClient.get('http://localhost:3000/contacts');
 
      /* const contactList = [
          {contactId: 1, contactName: 'Neo'},
@@ -19,5 +22,21 @@ export class ContactsService {
          {contactId: 4, contactName: 'Thebe'}
      ]; */
 
+    }
+    // tslint:disable-next-line: typedef
+    createContact(createBody){
+      const httpHeaders = new HttpHeaders();
+      httpHeaders.append('content-type', 'application/json');
+      return this.httpClient.post('http://localhost:3000/contacts', createBody, { headers : httpHeaders});
+    }
+    // tslint:disable-next-line: typedef
+    updateContact(contactId, updatedBody){
+      const endpointURL = 'http://localhost:3000/contacts/' + contactId;
+     // tslint:disable-next-line: align
+     return this.httpClient.put(endpointURL, updatedBody);
+    }
+    deleteContacts(contactId){
+      const endpointURL = 'http://localhost:3000/contacts/' + contactId;
+      return this.httpClient.delete(endpointURL);
     }
 }

@@ -6,3 +6,17 @@
         {{ contact.firstname }}
     </li>
 </ul>
+
+<h3>Create New Contacts</h3>
+<div *ngIf="msgTrue">Contact Created sucessfully</div>
+<div class="container">
+
+    <form #addNewContactForm="ngForm" (submit)="addNewContact(addNewContactForm)">
+        <input type="text" class="form-control" name="id" required ngModel>
+        <input type="text" class="form-control" name="firstname" required ngModel>
+        <input type="text" class="form-control" name="lastname" required ngModel>
+        <button class="form-control" [disabled]="!addNewContactForm.valid">Add New Contact</button>
+    </form>
+    <button (click)="updateContacts(3)">Update Contacts</button>
+    <button (click)="deleteContact(44)">Delete Contacts</button>
+</div>
